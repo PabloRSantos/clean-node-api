@@ -1,14 +1,14 @@
 import { DbAddAccount } from './db-add-account'
-import { AccountModel, AddAccount, AddAccountModel, AddAccountRepository, Hash } from './db-add-account-protocols'
+import { AccountModel, AddAccount, AddAccountModel, AddAccountRepository, Hasher } from './db-add-account-protocols'
 
 interface SutTypes {
   sut: AddAccount
-  hasherStub: Hash
+  hasherStub: Hasher
   addAccountRepositoryStub: AddAccountRepository
 }
 
-const makeHasher = (): Hash => {
-  class HasherStub implements Hash {
+const makeHasher = (): Hasher => {
+  class HasherStub implements Hasher {
     async hash (value: string): Promise<string> {
       return Promise.resolve('hashed_password')
     }
