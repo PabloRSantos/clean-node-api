@@ -7,7 +7,9 @@ import { MongoHelper } from '../helpers/mongo-helper'
 
 export class AccountMongoRepository implements AddAccountRepository, LoadAccountByEmailRepository, UpdateAccessTokenRepository {
   async updateAccessToken (id: string, token: string): Promise<void> {
-    throw new Error('Method not implemented.')
+    const accountCollection = await MongoHelper.getCollection('accounts')
+
+    await accountCollection.updateOne({ _id: id }, { $set: { accessToken: token } })
   }
 
   async loadByEmail (email: string): Promise<AccountModel> {
