@@ -14,7 +14,8 @@
     "dev:server": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --poll src/main/server.ts",
     "up": "npm run build && docker-compose up -d",
     "down": "docker-compose down",
-    "start": "node dist/main/server.js"
+    "start": "node dist/main/server.js",
+    "debug": "node --inspect=0.0.0.0:9222 --nolazy dist/main/server.js"
   },
   "keywords": [],
   "author": "",
