@@ -1,0 +1,12 @@
+{
+    "files.exclude": {
+        "node_modules": true,
+        "dist": true,
+        "requirements": true,
+        "data": true,
+        "coverage": true,
+        "images": true,
+        "yarn.lock": true,
+        "globalConfig.json": true,
+    }
+}
