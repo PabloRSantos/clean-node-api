@@ -1,4 +1,4 @@
-import { AddSurvey, AddSurveyModel, badRequest, HttpRequest, serverError, Validation } from './add-survey-controller-protocols'
+import { AddSurvey, AddSurveyModel, badRequest, HttpRequest, noContent, serverError, Validation } from './add-survey-controller-protocols'
 import { AddSurveyController } from './add-survey-controller'
 
 interface SutTypes {
@@ -80,5 +80,13 @@ describe('AddSurvey Controller', () => {
     const httpResponse = await sut.handle(makeHttpRequest())
 
     expect(httpResponse).toEqual(serverError(new Error()))
+  })
+
+  test('Should returns 204 on success', async () => {
+    const { sut } = makeSut()
+
+    const httpResponse = await sut.handle(makeHttpRequest())
+
+    expect(httpResponse).toEqual(noContent())
   })
 })
