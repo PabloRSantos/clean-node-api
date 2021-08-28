@@ -10,7 +10,7 @@
     "test:integration": "yarn test --watch -c jest-integration.config.js",
     "test:staged": "yarn test --findRelatedTests",
     "test:ci": "yarn test --coverage",
-    "test:coveralls": "yarn test:ci && coverals < coverage/lcov.info",
+    "test:coveralls": "yarn test:ci && coveralls < coverage/lcov.info",
     "build": "rimraf dist && tsc",
     "build:watch": "tsc -w",
     "dev:server": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --poll src/main/server.ts",
