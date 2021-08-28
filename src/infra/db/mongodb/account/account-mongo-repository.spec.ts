@@ -22,62 +22,66 @@ describe('Account Mongo Repository', () => {
     return new AccountMongoRepository()
   }
 
-  it('Should return an account on add success', async () => {
-    const sut = makeSut()
+  describe('add()', () => {
+    it('Should return an account on add success', async () => {
+      const sut = makeSut()
 
-    const account = await sut.add({
-      name: 'any_name',
-      email: 'any_email',
-      password: 'any_password'
+      const account = await sut.add({
+        name: 'any_name',
+        email: 'any_email',
+        password: 'any_password'
+      })
+
+      expect(account).toBeTruthy()
+      expect(account.id).toBeTruthy()
+      expect(account.name).toBe('any_name')
+      expect(account.email).toBe('any_email')
+      expect(account.password).toBe('any_password')
     })
-
-    expect(account).toBeTruthy()
-    expect(account.id).toBeTruthy()
-    expect(account.name).toBe('any_name')
-    expect(account.email).toBe('any_email')
-    expect(account.password).toBe('any_password')
   })
 
-  it('Should return an account on loadByEmail success', async () => {
-    const sut = makeSut()
+  describe('load()', () => {
+    it('Should return an account on loadByEmail success', async () => {
+      const sut = makeSut()
 
-    await accountCollection.insertOne({
-      name: 'any_name',
-      email: 'any_email',
-      password: 'any_password'
+      await accountCollection.insertOne({
+        name: 'any_name',
+        email: 'any_email',
+        password: 'any_password'
+      })
+
+      const account = await sut.loadByEmail('any_email')
+
+      expect(account).toBeTruthy()
+      expect(account.id).toBeTruthy()
+      expect(account.name).toBe('any_name')
+      expect(account.email).toBe('any_email')
+      expect(account.password).toBe('any_password')
     })
 
-    const account = await sut.loadByEmail('any_email')
+    it('Should return null if loadByEmail fails', async () => {
+      const sut = makeSut()
 
-    expect(account).toBeTruthy()
-    expect(account.id).toBeTruthy()
-    expect(account.name).toBe('any_name')
-    expect(account.email).toBe('any_email')
-    expect(account.password).toBe('any_password')
-  })
+      const account = await sut.loadByEmail('any_email')
 
-  it('Should return null if loadByEmail fails', async () => {
-    const sut = makeSut()
-
-    const account = await sut.loadByEmail('any_email')
-
-    expect(account).toBeFalsy()
-  })
-
-  it('Should update the account accessToken on updateAccessToken success', async () => {
-    const sut = makeSut()
-
-    const insertResult = await accountCollection.insertOne({
-      name: 'any_name',
-      email: 'any_email',
-      password: 'any_password'
+      expect(account).toBeFalsy()
     })
 
-    await sut.updateAccessToken(insertResult.insertedId as any, 'any_token')
+    it('Should update the account accessToken on updateAccessToken success', async () => {
+      const sut = makeSut()
 
-    const account = await accountCollection.findOne(insertResult.insertedId)
+      const insertResult = await accountCollection.insertOne({
+        name: 'any_name',
+        email: 'any_email',
+        password: 'any_password'
+      })
 
-    expect(account).toBeTruthy()
-    expect(account.accessToken).toBe('any_token')
+      await sut.updateAccessToken(insertResult.insertedId as any, 'any_token')
+
+      const account = await accountCollection.findOne(insertResult.insertedId)
+
+      expect(account).toBeTruthy()
+      expect(account.accessToken).toBe('any_token')
+    })
   })
 })
