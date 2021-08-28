@@ -14,6 +14,7 @@
     "build:watch": "tsc -w",
     "dev:server": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --poll src/main/server.ts",
     "up": "npm run build && docker-compose up -d",
+    "up:watch": "npm run build && docker-compose up",
     "down": "docker-compose down",
     "start": "node dist/main/server.js",
     "debug": "nodemon -L --watch ./dist --inspect=0.0.0.0:9222 --nolazy ./dist/main/server.js"
