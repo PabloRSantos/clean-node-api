@@ -3,8 +3,7 @@ import { Decrypter, LoadAccountByToken } from './db-load-account-by-token-protoc
 
 export class DbLoadAccountByToken implements LoadAccountByToken {
   constructor (
-    private readonly decrypter: Decrypter,
-    private readonly secret: string
+    private readonly decrypter: Decrypter
   ) {}
 
   async load (accessToken: string, role?: string): Promise<AccountModel> {
