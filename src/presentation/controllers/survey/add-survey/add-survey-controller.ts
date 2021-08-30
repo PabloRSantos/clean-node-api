@@ -16,7 +16,7 @@ export class AddSurveyController implements Controller {
 
       const { question, answers } = httpRequest.body
 
-      await this.dbAddSurvey.add({ question, answers })
+      await this.dbAddSurvey.add({ question, answers, date: new Date() })
 
       return noContent()
     } catch (error) {
