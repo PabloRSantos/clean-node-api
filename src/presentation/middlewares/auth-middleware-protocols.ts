@@ -1,5 +1,5 @@
-export * from '../../domain/usecases'
-export * from '../../domain/models'
+export * from '@/domain/usecases'
+export * from '@/domain/models'
 export * from '../errors'
 export * from '../helpers/http/http-helper'
 export * from '../protocols'

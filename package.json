@@ -11,8 +11,8 @@
     "test:staged": "yarn test --findRelatedTests",
     "test:ci": "yarn test --coverage",
     "test:coveralls": "yarn test:ci && coveralls < coverage/lcov.info",
-    "build": "rimraf dist && tsc",
-    "build:watch": "tsc -w",
+    "build": "rimraf dist && tsc -p tsconfig-build.json",
+    "build:watch": "tsc -w -p tsconfig-build.json",
     "dev:server": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --poll src/main/server.ts",
     "up": "npm run build && docker-compose up -d",
     "up:watch": "npm run build && docker-compose up",
@@ -55,11 +55,15 @@
     "bcrypt": "^5.0.1",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
+    "module-alias": "^2.2.2",
     "mongodb": "^4.1.0",
     "nodemon": "^2.0.12",
     "validator": "^13.6.0"
   },
   "engines": {
     "node": "14.x"
+  },
+  "_moduleAliases": {
+    "@": "dist"
   }
 }

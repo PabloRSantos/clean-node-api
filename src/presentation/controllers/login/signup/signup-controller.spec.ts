@@ -1,8 +1,7 @@
-import { AccountModel } from '../../../../domain/models/account'
-import { AddAccount, AddAccountModel } from '../../../../domain/usecases/add-account'
-import { EmailInUseError, MissingParamError, ServerError } from '../../../errors'
-import { badRequest, forbidden, ok, serverError } from '../../../helpers/http/http-helper'
-import { Validation, Authentication, HttpRequest, AuthenticationModel } from '../login/login-protocols'
+
+import { serverError, forbidden, badRequest, ok, AccountModel, AddAccount, AddAccountModel, Authentication, AuthenticationModel } from '@/presentation/middlewares/auth-middleware-protocols'
+import { Validation, HttpRequest } from '@/presentation/protocols'
+import { EmailInUseError, MissingParamError, ServerError } from '@/presentation/errors'
 import { SignUpController } from './signup-controller'
 
 interface SutTypes {

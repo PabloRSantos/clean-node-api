@@ -4,9 +4,9 @@ import {
   LoadAccountByEmailRepository,
   HashComparer,
   Encrypter,
-  AccountModel,
   AuthenticationModel,
-  UpdateAccessTokenRepository
+  UpdateAccessTokenRepository,
+  AccountModel
 } from './db-authentication-protocols'
 
 interface SutTypes {

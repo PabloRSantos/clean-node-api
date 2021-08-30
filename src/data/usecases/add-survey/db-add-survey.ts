@@ -1,5 +1,5 @@
-import { AddSurvey, AddSurveyModel } from '../../../presentation/controllers/survey/add-survey/add-survey-controller-protocols'
-import { AddSurveyRepository } from '../../protocols/db/survey/add-survey-repository'
+import { AddSurveyRepository } from '@/data/protocols/db/survey/add-survey-repository'
+import { AddSurvey, AddSurveyModel } from '@/domain/usecases'
 
 export class DbAddSurvey implements AddSurvey {
   constructor (

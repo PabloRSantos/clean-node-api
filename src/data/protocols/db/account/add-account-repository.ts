@@ -1,4 +1,5 @@
-import { AddAccountModel, AccountModel } from '../../../usecases/add-account/db-add-account-protocols'
+import { AccountModel } from '@/domain/models'
+import { AddAccountModel } from '@/domain/usecases'
 
 export interface AddAccountRepository {
   add (accountData: AddAccountModel): Promise<AccountModel>

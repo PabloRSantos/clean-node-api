@@ -1,4 +1,13 @@
-import { AddSurvey, badRequest, Controller, HttpRequest, HttpResponse, noContent, serverError, Validation } from './add-survey-controller-protocols'
+import {
+  AddSurvey,
+  badRequest,
+  Controller,
+  HttpRequest,
+  HttpResponse,
+  noContent,
+  serverError,
+  Validation
+} from './add-survey-controller-protocols'
 
 export class AddSurveyController implements Controller {
   constructor (
@@ -22,5 +31,5 @@ export class AddSurveyController implements Controller {
     } catch (error) {
       return serverError(error)
     }
-  };
+  }
 }
