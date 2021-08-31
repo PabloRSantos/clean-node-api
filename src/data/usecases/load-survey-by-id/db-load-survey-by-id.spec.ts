@@ -55,13 +55,13 @@ describe('DbLoadSurveyById', () => {
     expect(loadByIdSpy).toHaveBeenCalledWith('any_id')
   })
 
-  //   test('Should return a list of surveys on success', async () => {
-  //     const { sut } = makeSut()
+  test('Should return a survey on success', async () => {
+    const { sut } = makeSut()
 
-  //     const surveys = await sut.load()
+    const survey = await sut.loadById('any_id')
 
-  //     expect(surveys).toEqual(makeFakeSurveys())
-  //   })
+    expect(survey).toEqual(makeFakeSurvey())
+  })
 
   //   test('Should throws if LoadSurveysRepository throws', async () => {
   //     const { sut, loadSurveysRepositoryStub } = makeSut()
