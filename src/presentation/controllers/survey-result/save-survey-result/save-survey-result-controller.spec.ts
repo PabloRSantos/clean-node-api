@@ -9,6 +9,7 @@ import {
   SurveyModel,
   SurveyResultModel
 } from './save-survey-result-controller-protocols'
+import MockDate from 'mockdate'
 
 type SutTypes = {
   sut: SaveSurveyResultController
@@ -45,8 +46,10 @@ const makeFakeRequest = (): HttpRequest => ({
     surveyId: 'any_id'
   },
   body: {
-    answer: 'any_answer'
-  }
+    answer: 'any_answer',
+    date: new Date()
+  },
+  accountId: 'any_account_id'
 })
 
 const makeSaveSurveyResultStub = (): SaveSurveyResult => {
@@ -81,6 +84,14 @@ const makeSut = (): SutTypes => {
 }
 
 describe('SaveSurveyResult Controller', () => {
+  beforeAll(() => {
+    MockDate.set(new Date())
+  })
+
+  afterAll(() => {
+    MockDate.reset()
+  })
+
   test('Should call LoadSurveyById with correct values', async () => {
     const { sut, loadSurveyByIdStub } = makeSut()
     const loadByIdSpy = jest.spyOn(loadSurveyByIdStub, 'loadById')
@@ -121,5 +132,19 @@ describe('SaveSurveyResult Controller', () => {
     const httpResponse = await sut.handle(makeFakeRequest())
 
     expect(httpResponse).toEqual(serverError(new Error()))
+  })
+
+  test('Should call SaveSurveyResult with correct values', async () => {
+    const { sut, saveSurveyResultStub } = makeSut()
+    const saveSpy = jest.spyOn(saveSurveyResultStub, 'save')
+
+    await sut.handle(makeFakeRequest())
+
+    expect(saveSpy).toHaveBeenCalledWith({
+      surveyId: 'any_id',
+      accountId: 'any_account_id',
+      answer: 'any_answer',
+      date: new Date()
+    })
   })
 })
