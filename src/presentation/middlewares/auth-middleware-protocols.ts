@@ -1,4 +1,4 @@
-export * from '@/domain/usecases'
+export * from '@/domain/usecases/account'
 export * from '@/domain/models'
 export * from '../errors'
 export * from '../helpers/http/http-helper'

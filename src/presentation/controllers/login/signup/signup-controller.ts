@@ -1,4 +1,4 @@
-import { AddAccount, Authentication } from '@/domain/usecases'
+import { AddAccount, Authentication } from '@/domain/usecases/account'
 import { EmailInUseError } from '@/presentation/errors'
 import { badRequest, forbidden, serverError, ok } from '@/presentation/middlewares/auth-middleware-protocols'
 import { Controller, Validation, HttpRequest, HttpResponse } from '@/presentation/protocols'
