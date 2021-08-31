@@ -1,4 +1,4 @@
-import { forbidden, InvalidParamError } from '@/presentation/middlewares/auth-middleware-protocols'
+import { forbidden, InvalidParamError, serverError } from '@/presentation/middlewares/auth-middleware-protocols'
 import { Controller, HttpRequest, HttpResponse } from '@/presentation/protocols'
 import { LoadSurveyById, SaveSurveyResult } from './save-survey-result-controller-protocols'
 
@@ -9,12 +9,16 @@ export class SaveSurveyResultController implements Controller {
   ) {}
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
-    const survey = await this.dbLoadSurveyById.loadById(httpRequest.params.surveyId)
+    try {
+      const survey = await this.dbLoadSurveyById.loadById(httpRequest.params.surveyId)
 
-    if (!survey) {
-      return forbidden(new InvalidParamError('surveyId'))
+      if (!survey) {
+        return forbidden(new InvalidParamError('surveyId'))
+      }
+
+      return null
+    } catch (error) {
+      return serverError(error)
     }
-
-    return null
   }
 }
