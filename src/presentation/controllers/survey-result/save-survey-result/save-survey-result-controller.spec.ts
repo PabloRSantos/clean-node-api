@@ -1,3 +1,5 @@
+import { InvalidParamError } from '@/presentation/errors'
+import { forbidden } from '@/presentation/helpers/http/http-helper'
 import { HttpRequest } from '@/presentation/protocols'
 import { SaveSurveyResultController } from './save-survey-result-controller'
 import {
@@ -85,12 +87,12 @@ describe('SaveSurveyResult Controller', () => {
     expect(loadByIdSpy).toHaveBeenCalledWith('any_id')
   })
 
-  //   test('Should return 403 if LoadSurveyById returns null', async () => {
-  //     const { sut, loadSurveyByIdStub } = makeSut()
-  //     jest.spyOn(loadSurveyByIdStub, 'loadById').mockResolvedValueOnce(null)
+  test('Should return 403 if LoadSurveyById returns null', async () => {
+    const { sut, loadSurveyByIdStub } = makeSut()
+    jest.spyOn(loadSurveyByIdStub, 'loadById').mockResolvedValueOnce(null)
 
-  //     const httpResponse = await sut.handle(makeFakeRequest())
+    const httpResponse = await sut.handle(makeFakeRequest())
 
-//     expect(httpResponse).toEqual(forbidden(new Error()))
-//   })
+    expect(httpResponse).toEqual(forbidden(new InvalidParamError('surveyId')))
+  })
 })
