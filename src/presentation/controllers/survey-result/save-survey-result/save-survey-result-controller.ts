@@ -11,7 +11,8 @@ export class SaveSurveyResultController implements Controller {
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const { surveyId } = httpRequest.params
-      const { answer } = httpRequest.body
+      const { answer, date } = httpRequest.body
+      const { accountId } = httpRequest
 
       const survey = await this.dbLoadSurveyById.loadById(surveyId)
 
@@ -24,6 +25,13 @@ export class SaveSurveyResultController implements Controller {
       } else {
         return forbidden(new InvalidParamError('surveyId'))
       }
+
+      await this.dbSaveSurveyResult.save({
+        surveyId,
+        answer,
+        date,
+        accountId
+      })
 
       return null
     } catch (error) {
