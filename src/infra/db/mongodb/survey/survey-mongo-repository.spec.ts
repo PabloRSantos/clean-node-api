@@ -77,7 +77,7 @@ describe('Account Mongo Repository', () => {
       expect(survey).toBeTruthy()
     })
 
-    it('Should load a survey by id on success', async () => {
+    it('Should return undefined if survey not exist', async () => {
       const sut = makeSut()
 
       const survey = await sut.loadById('any_id')

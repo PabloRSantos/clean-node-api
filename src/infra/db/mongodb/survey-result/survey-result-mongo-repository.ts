@@ -8,7 +8,7 @@ import { MongoHelper } from '../helpers/mongo-helper'
 export class SurveyResultMongoRepository implements SaveSurveyResultRepository {
   async save (data: SaveSurveyResultModel): Promise<SurveyResultModel> {
     const surveyCollection = await MongoHelper.getCollection<SurveyResultModel>(
-      'surveysResult'
+      'surveyResults'
     )
 
     const { value: surveyResult } = await surveyCollection.findOneAndUpdate(
