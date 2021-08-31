@@ -46,7 +46,7 @@ describe('Account Mongo Repository', () => {
     })
   })
 
-  describe('load()', () => {
+  describe('loadAll()', () => {
     it('Should load a list of surveys on success', async () => {
       const sut = makeSut()
 
@@ -54,6 +54,7 @@ describe('Account Mongo Repository', () => {
       const surveys = await sut.loadAll()
 
       expect(surveys).toHaveLength(2)
+      expect(surveys[0].id).toBeTruthy()
       expect(surveys[0].question).toBe('any_question')
     })
 
@@ -75,6 +76,7 @@ describe('Account Mongo Repository', () => {
       const survey = await sut.loadById(insertedId as any)
 
       expect(survey).toBeTruthy()
+      expect(survey.id).toBeTruthy()
     })
 
     it('Should return undefined if survey not exist', async () => {
