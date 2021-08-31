@@ -46,8 +46,7 @@ const makeFakeRequest = (): HttpRequest => ({
     surveyId: 'any_id'
   },
   body: {
-    answer: 'any_answer',
-    date: new Date()
+    answer: 'any_answer'
   },
   accountId: 'any_account_id'
 })
