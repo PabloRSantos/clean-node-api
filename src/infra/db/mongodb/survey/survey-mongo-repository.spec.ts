@@ -1,4 +1,4 @@
-import { Collection } from 'mongodb'
+import { Collection, ObjectId } from 'mongodb'
 import { AddSurveyModel } from '@/domain/usecases/survey'
 import { MongoHelper } from '../helpers/mongo-helper'
 import { SurveyMongoRepository } from './survey-mongo-repository'
@@ -73,7 +73,7 @@ describe('Account Mongo Repository', () => {
 
       const { insertedId } = await surveyCollection.insertOne(makeFakeSurveyData())
 
-      const survey = await sut.loadById(insertedId as any)
+      const survey = await sut.loadById(insertedId.toHexString())
 
       expect(survey).toBeTruthy()
       expect(survey.id).toBeTruthy()
@@ -82,7 +82,7 @@ describe('Account Mongo Repository', () => {
     it('Should return undefined if survey not exist', async () => {
       const sut = makeSut()
 
-      const survey = await sut.loadById('any_id')
+      const survey = await sut.loadById(new ObjectId().toHexString())
 
       expect(survey).toBeUndefined()
     })
