@@ -1,5 +1,5 @@
 
-import { serverError, forbidden, badRequest, ok, AccountModel, AddAccount, AddAccountModel, Authentication, AuthenticationModel } from '@/presentation/middlewares/auth-middleware-protocols'
+import { serverError, forbidden, badRequest, ok, AccountModel, AddAccount, AddAccountParams, Authentication, AuthenticationParams } from '@/presentation/middlewares/auth-middleware-protocols'
 import { Validation, HttpRequest } from '@/presentation/protocols'
 import { EmailInUseError, MissingParamError, ServerError } from '@/presentation/errors'
 import { SignUpController } from './signup-controller'
@@ -13,7 +13,7 @@ type SutTypes = {
 
 const makeAuthentication = (): Authentication => {
   class AuthenticationStub implements Authentication {
-    async auth (authentication: AuthenticationModel): Promise<string> {
+    async auth (authentication: AuthenticationParams): Promise<string> {
       return 'any_token'
     }
   }
@@ -23,7 +23,7 @@ const makeAuthentication = (): Authentication => {
 
 const makeAddAccount = (): AddAccount => {
   class AddAccountStub implements AddAccount {
-    async add (account: AddAccountModel): Promise<AccountModel> {
+    async add (account: AddAccountParams): Promise<AccountModel> {
       return Promise.resolve(makeFakeAccount())
     }
   }

@@ -5,7 +5,7 @@ import { SaveSurveyResultController } from './save-survey-result-controller'
 import {
   LoadSurveyById,
   SaveSurveyResult,
-  SaveSurveyResultModel,
+  SaveSurveyResultParams,
   SurveyModel,
   SurveyResultModel
 } from './save-survey-result-controller-protocols'
@@ -17,7 +17,7 @@ type SutTypes = {
   loadSurveyByIdStub: LoadSurveyById
 }
 
-const makeFakeSaveSurveyResult = (): SaveSurveyResultModel => ({
+const makeFakeSaveSurveyResult = (): SaveSurveyResultParams => ({
   surveyId: 'any_survey_id',
   accountId: 'any_account_id',
   answer: 'any_answer',
@@ -53,7 +53,7 @@ const makeFakeRequest = (): HttpRequest => ({
 
 const makeSaveSurveyResultStub = (): SaveSurveyResult => {
   class SaveSurveyResultStub implements SaveSurveyResult {
-    async save (data: SaveSurveyResultModel): Promise<SurveyResultModel> {
+    async save (data: SaveSurveyResultParams): Promise<SurveyResultModel> {
       return makeFakeSurveyResult()
     }
   }

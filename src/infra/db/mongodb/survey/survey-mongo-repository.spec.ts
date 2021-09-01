@@ -1,9 +1,9 @@
 import { Collection, ObjectId } from 'mongodb'
-import { AddSurveyModel } from '@/domain/usecases/survey'
+import { AddSurveyParams } from '@/domain/usecases/survey'
 import { MongoHelper } from '../helpers/mongo-helper'
 import { SurveyMongoRepository } from './survey-mongo-repository'
 
-const makeFakeSurveyData = (): AddSurveyModel => ({
+const makeFakeSurveyData = (): AddSurveyParams => ({
   question: 'any_question',
   answers: [{
     image: 'any_image',
