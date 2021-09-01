@@ -1,6 +1,5 @@
 import {
   AccessDeniedError,
-  AccountModel,
   forbidden,
   HttpRequest,
   LoadAccountByToken,
@@ -8,17 +7,11 @@ import {
   serverError
 } from './auth-middleware-protocols'
 import { AuthMiddleware } from './auth-middleware'
+import { mockLoadAccountByToken } from '../test'
 type SutTypes = {
   sut: AuthMiddleware
   loadAccountByTokenStub: LoadAccountByToken
 }
-
-const makeFakeAccountModel = (): AccountModel => ({
-  id: 'any_id',
-  name: 'any_name',
-  email: 'any_email',
-  password: 'any_password'
-})
 
 const makeFakeRequest = (): HttpRequest => ({
   headers: {
@@ -26,18 +19,8 @@ const makeFakeRequest = (): HttpRequest => ({
   }
 })
 
-const makeLoadAccountByTokenStub = (): LoadAccountByToken => {
-  class LoadAccountByTokenStub implements LoadAccountByToken {
-    async load (accessToken: string, role?: string): Promise<AccountModel> {
-      return makeFakeAccountModel()
-    }
-  }
-
-  return new LoadAccountByTokenStub()
-}
-
 const makeSut = (role?: string): SutTypes => {
-  const loadAccountByTokenStub = makeLoadAccountByTokenStub()
+  const loadAccountByTokenStub = mockLoadAccountByToken()
   const sut = new AuthMiddleware(loadAccountByTokenStub, role)
 
   return { sut, loadAccountByTokenStub }

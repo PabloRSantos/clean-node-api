@@ -1,5 +1,6 @@
 import { LogErrorRepository } from '@/data/protocols/db/log/log-error-repository'
-import { AccountModel } from '@/domain/models/account'
+import { mockLogErrorRepository } from '@/data/tests/mock-db-log'
+import { mockAccountModel } from '@/domain/test'
 import { ok, serverError } from '@/presentation/helpers/http/http-helper'
 import { Controller, HttpRequest, HttpResponse } from '@/presentation/protocols'
 import { LogControllerDecorator } from './log-controller-decorator'
@@ -10,20 +11,10 @@ type SutTypes = {
   logErrorRepositoryStub: LogErrorRepository
 }
 
-const makeLogErrorRepository = (): LogErrorRepository => {
-  class LogErrorRespositoryStub implements LogErrorRepository {
-    async logError (stack: string): Promise<void> {
-      await Promise.resolve(null)
-    }
-  }
-
-  return new LogErrorRespositoryStub()
-}
-
 const makeController = (): Controller => {
   class ControllerStub implements Controller {
     async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
-      return Promise.resolve(ok(makeFakeAccount()))
+      return Promise.resolve(ok(mockAccountModel()))
     }
   }
 
@@ -32,7 +23,7 @@ const makeController = (): Controller => {
 
 const makeSut = (): SutTypes => {
   const controllerStub = makeController()
-  const logErrorRepositoryStub = makeLogErrorRepository()
+  const logErrorRepositoryStub = mockLogErrorRepository()
 
   const sut = new LogControllerDecorator(controllerStub, logErrorRepositoryStub)
 
@@ -46,13 +37,6 @@ const makeFakeRequest = (): HttpRequest => ({
     password: 'any_password',
     passwordConfirmation: 'any_password'
   }
-})
-
-const makeFakeAccount = (): AccountModel => ({
-  id: 'valid_id',
-  name: 'valid_name',
-  email: 'valid_email',
-  password: 'valid_password'
 })
 
 const makeFakeServerError = (): HttpResponse => {
@@ -74,7 +58,7 @@ describe('LogController Decorator', () => {
     const { sut } = makeSut()
 
     const httpResponse = await sut.handle(makeFakeRequest())
-    expect(httpResponse).toEqual(ok(makeFakeAccount()))
+    expect(httpResponse).toEqual(ok(mockAccountModel()))
   })
 
   test('Should call LogErrorRepository with correct error if controller returns a server error', async () => {
