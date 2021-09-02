@@ -4,9 +4,8 @@ import {
   SurveyResultModel
 } from '@/data/usecases/survey-result/save-survey-result/db-save-survey-result-protocols'
 import { ObjectId } from 'mongodb'
-import { MongoHelper } from '../helpers/mongo-helper'
 import round from 'mongo-round'
-import { QueryBuilder } from '../query-builder'
+import { MongoHelper, QueryBuilder } from '../helpers'
 export class SurveyResultMongoRepository implements SaveSurveyResultRepository {
   async save (data: SaveSurveyResultParams): Promise<SurveyResultModel> {
     const surveyCollection = await MongoHelper.getCollection<SurveyResultModel>(
@@ -199,6 +198,7 @@ export class SurveyResultMongoRepository implements SaveSurveyResultRepository {
         answers: '$answers'
       })
       .build()
+
     const surveyResult = await surveyResultCollection.aggregate(query).toArray()
     return surveyResult.length ? surveyResult[0] : null
   }
