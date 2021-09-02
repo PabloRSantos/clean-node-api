@@ -12,6 +12,9 @@ export class SurveyResultMongoRepository implements SaveSurveyResultRepository {
       'surveyResults'
     )
 
+    console.log(data.accountId)
+    console.log(data.surveyId)
+
     await surveyCollection.findOneAndUpdate(
       {
         surveyId: new ObjectId(data.surveyId),

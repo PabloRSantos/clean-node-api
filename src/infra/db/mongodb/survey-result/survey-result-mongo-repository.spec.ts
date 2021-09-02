@@ -38,7 +38,7 @@ const makeAccount = async (): Promise<AccountModel> => {
 
   const account = await accountCollection.findOne<AccountModel>({ _id: insertedId })
 
-  return account
+  return MongoHelper.map(account)
 }
 
 describe('Account Mongo Repository', () => {
@@ -78,6 +78,8 @@ describe('Account Mongo Repository', () => {
       expect(surveyResult.answers[0].answer).toBe(survey.answers[0].answer)
       expect(surveyResult.answers[0].count).toBe(1)
       expect(surveyResult.answers[0].percent).toBe(100)
+      expect(surveyResult.answers[1].count).toBe(0)
+      expect(surveyResult.answers[1].percent).toBe(0)
     })
 
     it('Should update survey result if its not new', async () => {
@@ -102,7 +104,7 @@ describe('Account Mongo Repository', () => {
       expect(surveyResult.surveyId).toEqual(survey.id)
       expect(surveyResult.answers[0].answer).toBe(survey.answers[1].answer)
       expect(surveyResult.answers[0].count).toBe(1)
-      expect(surveyResult.answers[0].percent).toBe(50)
+      expect(surveyResult.answers[0].percent).toBe(100)
     })
   })
 })
