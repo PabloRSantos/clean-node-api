@@ -1,3 +1,4 @@
+import { forbidden, InvalidParamError } from '@/presentation/middlewares/auth-middleware-protocols'
 import { LoadSurveyResultController } from './load-survey-result-controller'
 import {
   HttpRequest,
@@ -31,5 +32,14 @@ describe('LoadSurveyResult Controller', () => {
     await sut.handle(mockRequest())
 
     expect(loadByIdSpy).toHaveBeenCalledWith('any_survey_id')
+  })
+
+  test('Should return 403 if LoadSurveyById returns null', async () => {
+    const { sut, loadSurveyByIdStub } = makeSut()
+    jest.spyOn(loadSurveyByIdStub, 'loadById').mockResolvedValueOnce(null)
+
+    const httpResponse = await sut.handle(mockRequest())
+
+    expect(httpResponse).toEqual(forbidden(new InvalidParamError('surveyId')))
   })
 })
