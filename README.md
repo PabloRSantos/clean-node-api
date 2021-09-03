@@ -2,11 +2,11 @@
 ---
 
 ## Arquitetura
-[![N|Solid](https://raw.githubusercontent.com/paulosoujava/clean-api-node/feat/login/images/archeture.png)](https://www.linkedin.com/in/paulo-oliveira-nodejs/)
+![N|Solid](https://raw.githubusercontent.com/paulosoujava/clean-api-node/feat/login/images/archeture.png)
 
 ## Testes
-[![N|Solid](https://raw.githubusercontent.com/paulosoujava/clean-api-node/feat/login/images/tests.png)](https://www.linkedin.com/in/paulo-oliveira-nodejs/)
-[![N|Solid](https://raw.githubusercontent.com/paulosoujava/clean-api-node/master/images/table.png)](https://www.linkedin.com/in/paulo-oliveira-nodejs/)
+![N|Solid](https://raw.githubusercontent.com/paulosoujava/clean-api-node/feat/login/images/tests.png)]
+[![N|Solid](https://raw.githubusercontent.com/paulosoujava/clean-api-node/master/images/table.png)
 
 [![Build Status](https://travis-ci.com/paulosoujava/clean-api-node.svg?branch=master)](https://travis-ci.com/paulosoujava/clean-api-node)
 [![Coverage Status](https://coveralls.io/repos/github/paulosoujava/clean-api-node/badge.svg?branch=master)](https://coveralls.io/github/paulosoujava/clean-api-node?branch=master)
@@ -25,7 +25,7 @@ Essa API faz parte do treinamento do professor Rodrigo Manguinho (Mango).
 
 O objetivo do treinamento é mostrar como criar uma API com uma arquitetura bem definida e desacoplada, utilizando TDD (programação orientada a testes) como metodologia de trabalho, Clean Architecture para fazer a distribuição de responsabilidades em camadas, sempre seguindo os princípios do SOLID e, sempre que possível, aplicando Design Patterns para resolver alguns problemas comuns.
 
-## [**Link para a documentação da API**](http://fordevs.herokuapp.com/api-docs)
+
 
 > ## APIs construídas no treinamento
 
