@@ -1,6 +1,6 @@
 import { LoadSurveyResult } from '@/domain/usecases/survey-result/load-survey-result'
 import { InvalidParamError } from '@/presentation/errors'
-import { forbidden, serverError } from '@/presentation/middlewares/auth-middleware-protocols'
+import { forbidden, ok, serverError } from '@/presentation/middlewares/auth-middleware-protocols'
 import {
   Controller,
   HttpRequest,
@@ -24,9 +24,9 @@ export class LoadSurveyResultController implements Controller {
         return forbidden(new InvalidParamError('surveyId'))
       }
 
-      await this.loadSurveyResult.load(surveyId)
+      const surveyResult = await this.loadSurveyResult.load(surveyId)
 
-      return null
+      return ok(surveyResult)
     } catch (error) {
       return serverError(new Error())
     }
