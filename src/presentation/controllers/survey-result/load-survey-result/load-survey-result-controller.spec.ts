@@ -1,4 +1,4 @@
-import { forbidden, InvalidParamError } from '@/presentation/middlewares/auth-middleware-protocols'
+import { forbidden, InvalidParamError, serverError } from '@/presentation/middlewares/auth-middleware-protocols'
 import { LoadSurveyResultController } from './load-survey-result-controller'
 import {
   HttpRequest,
@@ -41,5 +41,14 @@ describe('LoadSurveyResult Controller', () => {
     const httpResponse = await sut.handle(mockRequest())
 
     expect(httpResponse).toEqual(forbidden(new InvalidParamError('surveyId')))
+  })
+
+  test('Should return 500 if LoadSurveyById throws', async () => {
+    const { sut, loadSurveyByIdStub } = makeSut()
+    jest.spyOn(loadSurveyByIdStub, 'loadById').mockRejectedValueOnce(new Error())
+
+    const httpResponse = await sut.handle(mockRequest())
+
+    expect(httpResponse).toEqual(serverError(new Error()))
   })
 })
