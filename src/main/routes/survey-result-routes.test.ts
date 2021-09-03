@@ -85,7 +85,7 @@ describe('Survey Routes', () => {
         .expect(403)
     })
 
-    test('Should return 204 on save survey result with valid token', async () => {
+    test('Should return 200 on load survey result with valid token', async () => {
       const accessToken = await makeAccessToken()
       const { insertedId } = await surveyCollection.insertOne({
         question: 'Question',
@@ -102,7 +102,7 @@ describe('Survey Routes', () => {
       const surveyId = new ObjectId(insertedId).toHexString()
 
       await request(app)
-        .put(`/api/surveys/${surveyId}/results`)
+        .get(`/api/surveys/${surveyId}/results`)
         .set('x-access-token', accessToken)
         .expect(200)
     })
